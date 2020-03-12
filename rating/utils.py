@@ -2,7 +2,6 @@ import json
 from django.shortcuts import HttpResponse
 from .models import User, models, Session, ModuleInstance, RatingRecord
 from functools import wraps
-from django.db.models import Avg
 
 
 def restful_response(code, message, data):
@@ -18,7 +17,10 @@ def params_error(message="", data=None):
 
 
 def check_username(username):
-    if len(username) == 0 or not username:
+    if not username:
+        return 'Please provide a username'
+
+    if len(username) == 0:
         return 'Please provide a username'
 
     if len(username) > 20:
@@ -34,6 +36,8 @@ def check_username(username):
 
 
 def check_email(email:str):
+    if not email:
+        return 'Invalid email address'
     if '@' not in email or len(email) > 50:
         return 'Invalid email address'
     else:
@@ -52,9 +56,11 @@ def check_email(email:str):
 
 
 def check_password(password1, password2):
+    if not password1:
+        return 'Please provide a password'
     if password1 != password2:
         return 'Passwords do not match'
-    elif len(password1) == 0 or not password1:
+    elif len(password1) == 0:
         return 'Please provide a password'
     elif len(password1) > 20:
         return 'The length of password should not be longer than 20'

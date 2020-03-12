@@ -11,5 +11,4 @@ urlpatterns = [
     path('ratings/average/', views.ratings_avg, name='ratings_avg'),
     path('ratings/view/', views.ratings_view, name='ratings_view'),
     path('ratings/rate/', views.ratings_rate, name='ratings_rate'),
-    path('test/', views.test, name='test'),
 ]

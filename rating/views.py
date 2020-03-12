@@ -154,9 +154,3 @@ def ratings_rate(request):
         return success(message='Successfully rated on professor {}({})'.format(
             professor.name, professor_id
         ))
-
-
-def test(request):
-    current_user_email = request.session.get('username')
-    print(current_user_email)
-    return success(data={'user': current_user_email})
